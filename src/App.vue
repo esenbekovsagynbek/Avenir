@@ -1,4 +1,4 @@
-
+/* eslint-disable */ 
 <template>
   <div id="app">
   <b-container fluid class="grey-bg">
@@ -34,7 +34,8 @@
     </b-row>
 
     
- <about-us  @showPopup='showPopupInfo'>
+ <about-us 
+            >
         <h1 class="about-us__heading">WHAT IS LOREM IPSUM? WHERE DOES IT COME FROM</h1>
         <p class="about-us__info1 pt-2 pb-2 ml-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -44,12 +45,21 @@
         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
         <b-link href="#" class="card-link text-dark">more</b-link>  
   </about-us>
-  <projects/>
+  <projects />
 </b-container>
 <welcome />
 <b-container fluid class="grey-bg">
-  <our-advantages/>
-  <partners/>
+  <our-advantages :our-advantages-content="ourAdvantagesContent"/>
+  <partners  />
+</b-container >
+<b-container>
+<post-create />
+  <h1>{{ postsCount }}</h1>
+  <div v-for="(post, idx) in allPosts" :key="idx">
+             <h1>{{post.title}}</h1>
+             <p>{{post.body}}</p>
+  </div>
+              
 </b-container>
 <b-container fluid class="footer text-white" >
     <b-row align-v="center pt-5" align-h="around">
@@ -75,13 +85,7 @@
           Website is designed by Zero-One project launched under the full support of AVENIR www.01edu.kg</p>
     </b-col>
 </b-container>
-<popUp
-    v-if ="isPopupVisible"
-    @closePopup='closePopupInfo'
-    >
-  <p>Hello</p>
-        
-</popUp>
+
 <router-view/>
 </div>
 </template>
@@ -92,34 +96,54 @@
     import Welcome from './components/Welcome'
     import OurAdvantages from './components/OurAdvantages'
     import Partners from './components/Partners'
-    import PopUp from './components/popup/PopUp'
+    import Experience from './assets/experience.png'
+    import Management from './assets/managment_adv.png'
+    import { mapGetters, mapActions} from 'vuex'
+    import PostCreate from './components/PostCreate'
 
     export default {
       name: 'app',
       
       data() {
         return {
-          isPopupVisible: false
+          isPopupVisible: false,
+          
+            ourAdvantagesContent: [
+            {srcImage: Experience, alt: 'experience img', title: 'Experience', 
+            text:'We have strong founders and team with immense experience of collaboration of government and private business in education sector.',
+            link: '#'},
+            {srcImage: Management, alt: 'management img', title: 'Management', 
+            text:'The largest association of enterpreneurs in Kyrgyzstan is the main partner of Avenir.',
+            link: '#'}
+                               ]
         }
       },
 
-      methods: {
-        showPopupInfo() {
-          this.isPopupVisible = true
-        },
+      // computed : {
+      //     allPosts() {
+      //       return this.$store.getters.allPosts
+      //     }
+      // },
 
-        closePopupInfo() {
-          this.isPopupVisible = false;
-        }
+      computed: {
+        ...mapGetters(['allPosts', 'postsCount'])
       },
 
+      methods: mapActions(['getPosts']),
+
+      async mounted() {
+        this.getPosts(3)
+        
+      },
+
+      
       components: {
           AboutUs,
           Projects,
           Welcome,
           OurAdvantages,
           Partners,
-          PopUp
+          PostCreate
       }
     }
 

@@ -6,18 +6,20 @@
             </b-col>
             <b-col>
               <b-card-group deck>
-                <b-card class="project">
-                  <b-img center top :src="require('../assets/ets.png')" alt="Logo ETS" class="mt-3 mb-5"></b-img>
-                  <b-card-title class="project__card-title mb-3">Lorem Ipsum</b-card-title>
+                <b-card class="project"
+                        :class="item.className"
+                        v-for="(item,idx) in currentProjectsContent"
+                        :key="idx">
+                  
+                  <b-img center top :src="item.srcLogo" :alt="item.alt" class="mt-3 mb-5"></b-img>
+                  <b-card-title class="project__card-title mb-3">{{ item.title }}</b-card-title>
                   <b-card-text class="project__card-text">
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. 
-                    It has roots in a piece of classical Latin literature from 45 BC, 
-                    making it over 2000 years old.
+                     {{ item.text }}
                   </b-card-text>
-                  <b-link href="#" class="card-link">more</b-link>
+                  <b-link :href="item.link" class="card-link">more</b-link>
                 </b-card>
       
-                <b-card class="project zero-one">
+                <!-- <b-card class="project zero-one">
                   <b-img center top :src="require('../assets/zero.png')" alt="Logo ZeroOne" class="mt-3 mb-5"></b-img>
                   <b-card-title class="project__card-title mb-3">Lorem Ipsum</b-card-title>
                   <b-card-text class="project__card-text ">
@@ -26,18 +28,7 @@
                     making it over 2000 years old.
                   </b-card-text>
                   <b-link href="#" class="card-link">more</b-link>
-                </b-card>
-    
-                <b-card class="project">
-                  <b-img center top :src="require('../assets/moodle.png')" alt="Logo moodle" class="mt-3 mb-5"></b-img>
-                  <b-card-title class="project__card-title mb-3">Lorem Ipsum</b-card-title>
-                  <b-card-text class="project__card-text">
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. 
-                    It has roots in a piece of classical Latin literature from 45 BC, 
-                    making it over 2000 years old.
-                  </b-card-text>
-                  <b-link href="#" class="card-link">more</b-link>
-                </b-card> 
+                </b-card> -->
              </b-card-group> 
           </b-col>
         </b-row>
@@ -45,7 +36,16 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
         export default {
-             name:'Projects'
-         }
+             name:'Projects',
+            computed: {
+             ...mapGetters(['currentProjectsContent'])
+             },
+        
+              methods : {
+
+              }
+      }
+         
     </script>

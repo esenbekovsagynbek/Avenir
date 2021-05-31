@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from './store/index.js'
 import App from './App.vue'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
@@ -10,12 +11,14 @@ import './assets/styles.scss'
 // import 'material-design-icons-iconfont'
 
 
+
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
 
 new Vue({
   el: '#app',
+  store,
   router,
   render: h => h(App)
 })

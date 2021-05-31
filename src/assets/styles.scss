@@ -87,18 +87,18 @@ body {
   .research {
     background: linear-gradient(0deg, rgba(169, 160, 160, 0.5), rgba(169, 160, 160, 0.5)), 
     url('research.png');
-    border-radius: 10px;
+
   }
   
   .research:hover {
     background: url('research.png');
-    border-radius: 10px;
+    
   }
   
   .analytics {
     background: linear-gradient(0deg, rgba(169, 160, 160, 0.5), rgba(169, 160, 160, 0.5)), 
     url('analytics.png');
-    border-radius: 10px;
+    
   }
   
   .analytics:hover {
@@ -123,6 +123,19 @@ body {
   
   .investment:hover {
     background: url('../assets/investment.png')
+  }
+
+  .research,
+  .analytics,
+  .managment,
+  .investment {
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    &:hover {
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
   
   .about-us__image-text {
@@ -307,6 +320,7 @@ body {
 
 .popup-wrapper {
   background: rgba(64, 64, 64, 0.4);
+  height: 10000px;
   display: flex;
   justify-content: center;
   position:absolute;
@@ -321,7 +335,7 @@ body {
   position: fixed;
   top: 30vh;
   width: 400px;
-  background: #fff;
+
   box-shadow: 0 0 17px 0 #e7e7e7;
   &__header, &__footer{
       display: flex;
